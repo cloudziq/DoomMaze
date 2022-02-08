@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/scary01.ogg-d20d6691b426b05f1723e68df61cb1f4.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/scary01.ogg"
+dest_files=[ "res://.import/scary01.ogg-d20d6691b426b05f1723e68df61cb1f4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
