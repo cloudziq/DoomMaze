@@ -1,15 +1,51 @@
-[gd_resource type="AudioBusLayout" format=2]
+[gd_resource type="AudioBusLayout" load_steps=4 format=2]
+
+[sub_resource type="AudioEffectReverb" id=1]
+resource_name = "Reverb"
+predelay_msec = 120.0
+room_size = 0.6
+damping = 0.8
+spread = 0.8
+hipass = 0.8
+dry = 0.25
+wet = 0.04
+
+[sub_resource type="AudioEffectAmplify" id=2]
+resource_name = "Amplify"
+volume_db = 6.0
+
+[sub_resource type="AudioEffectReverb" id=3]
+resource_name = "Reverb"
+predelay_msec = 250.0
+room_size = 0.6
+damping = 0.65
+hipass = 0.66
+dry = 0.68
+wet = 0.2
 
 [resource]
-bus/1/name = "Sound"
+bus/0/volume_db = 1.95374
+bus/1/name = "Music"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = "Master"
-bus/2/name = "Music"
+bus/2/name = "maze_reverb"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = "Master"
+bus/2/effect/0/effect = SubResource( 1 )
+bus/2/effect/0/enabled = true
+bus/3/name = "mob"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -1.85699
+bus/3/send = "Master"
+bus/3/effect/0/effect = SubResource( 2 )
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource( 3 )
+bus/3/effect/1/enabled = true

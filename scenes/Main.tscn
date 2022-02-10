@@ -1,34 +1,57 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
-[ext_resource path="res://scenes/level_1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/music/Unknown_place.ogg" type="AudioStream" id=2]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sounds/mob/mob_proximity.ogg" type="AudioStream" id=5]
+[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+ambient_light_color = Color( 0.203922, 0.203922, 0.203922, 1 )
+ambient_light_energy = 0.4
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 0.839216 )
+fog_sun_color = Color( 0, 0, 0, 1 )
+fog_depth_begin = 0.0
+fog_depth_end = 26.0
+fog_depth_curve = 0.466516
+fog_transmit_enabled = true
+fog_transmit_curve = 0.482969
+fog_height_min = 33.7
+fog_height_max = -2.7
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
+_mob = ExtResource( 4 )
 
-[node name="levels" type="Node" parent="."]
-
-[node name="level_1" parent="levels" instance=ExtResource( 2 )]
+[node name="GUI" parent="." instance=ExtResource( 6 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0 )
 
-[node name="Mob" parent="." instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
 
-[node name="Mob2" parent="." instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+[node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
+transform = Transform( -0.0116312, 0.98964, 0.143096, 0.190815, -0.138279, 0.971838, 0.981557, 0.0386085, -0.18723, 0, 24, 0 )
+visible = false
+light_energy = 4.0
+shadow_enabled = true
+shadow_color = Color( 0.584314, 0.584314, 0.584314, 1 )
 
-[node name="Mob3" parent="." instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+[node name="Sound" type="Node" parent="."]
 
-[node name="Mob4" parent="." instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+[node name="LevelMusic" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 2 )
+volume_db = -6.0
+bus = "Music"
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 62, 72 )
-projection = 1
-current = true
-size = 63.85
+[node name="MobProximity" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 5 )
+volume_db = 6.0
+
+[connection signal="new_game" from="GUI" to="." method="new_game"]
+[connection signal="game_over" from="Player" to="." method="game_over"]

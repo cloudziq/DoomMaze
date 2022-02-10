@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/Mob.gd" type="Script" id=1]
-
-[sub_resource type="BoxShape" id=9]
-extents = Vector3( 4, 4, 4 )
+[ext_resource path="res://assets/sounds/mob/mob_chase.ogg" type="AudioStream" id=2]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 0.001
@@ -33,61 +31,136 @@ rings = 6
 [sub_resource type="CubeMesh" id=6]
 size = Vector3( 0.61, 0.2, 0.1 )
 
+[sub_resource type="CylinderMesh" id=10]
+top_radius = 0.0
+bottom_radius = 0.121
+height = 0.471
+
+[sub_resource type="BoxShape" id=9]
+margin = 0.6
+extents = Vector3( 2.66751, 2.17001, 2.97375 )
+
+[sub_resource type="CapsuleShape" id=11]
+margin = 0.2
+radius = 4.0
+height = 0.01
+
 [node name="Mob" type="KinematicBody" groups=["enemy"]]
-transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 1.14292, 0 )
+transform = Transform( 1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 2.14292, 0 )
+collision_layer = 2
+collision_mask = 5
+collision/safe_margin = 0.1
 script = ExtResource( 1 )
+
+[node name="Body" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.14286, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Body"]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 0, 3.31406, 0 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Body"]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, -1.02682, 3.31406, 2.47236 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Body"]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 0.945764, 3.31406, 2.47236 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Body"]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 1.15935, 3.13574, 2.82696 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 8 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="Body"]
+transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, -1.24373, 3.48856, 2.83279 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 8 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Body"]
+transform = Transform( 2.8, 0, 0, 0, 2.56796, -1.11605, 0, 1.11605, 2.56796, 0.0219853, 2.39894, 2.54048 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="Body"]
+transform = Transform( 2.41109, -0.939366, -1.06969, -0.184395, 1.8801, -2.06669, 1.41161, 1.85007, 1.55711, -1.23514, 5.3987, 2.20219 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="Body"]
+transform = Transform( 2.41037, 0.941179, 1.06974, 0.183035, 1.88024, -2.06668, -1.41303, 1.84902, 1.55707, 1.31511, 5.38839, 2.26324 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.744018, 0 )
 shape = SubResource( 9 )
 
+[node name="MobCollider" type="Area" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MobCollider"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.744018, 0 )
+shape = SubResource( 11 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.714286, 0, -6.24448e-08, 0, 0.714286, 0, 6.24448e-08, 0, -0.714286, 0, 3.49907, -0.252509 )
+
 [node name="ray_front" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941531, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, 10 )
+collision_mask = 6
+debug_shape_custom_color = Color( 0, 1, 1, 1 )
 debug_shape_thickness = 5.0
 
 [node name="ray_left" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941531, -0.0303755 )
 enabled = true
 cast_to = Vector3( 10, 0, 0 )
+collision_mask = 6
+debug_shape_custom_color = Color( 0, 1, 1, 1 )
 debug_shape_thickness = 5.0
 
 [node name="ray_right" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941531, -0.0303755 )
 enabled = true
 cast_to = Vector3( -10, 0, 0 )
+collision_mask = 6
+debug_shape_custom_color = Color( 0, 1, 1, 1 )
 debug_shape_thickness = 5.0
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.836527, 0 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 3 )
+[node name="ray_to_player" type="RayCast" parent="."]
+process_priority = -1
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941531, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -100 )
+collision_mask = 5
+debug_shape_custom_color = Color( 0.32549, 1, 0.368627, 1 )
+debug_shape_thickness = 5.0
 
-[node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -0.733444, 0.836527, 1.76597 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+[node name="chase" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 0.714286, 0, 0, 0, 0.714286, 0, 0, 0, 0.714286, 0, 0, 0 )
+stream = ExtResource( 2 )
+unit_db = 10.0
+unit_size = 8.0
+max_db = 6.0
+max_distance = 400.0
+bus = "mob"
+emission_angle_degrees = 90.0
+emission_angle_filter_attenuation_db = -6.0
+attenuation_filter_db = -32.0
 
-[node name="MeshInstance3" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.675546, 0.836527, 1.76597 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
-[node name="MeshInstance5" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.828109, 0.709159, 2.01926 )
-mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
-
-[node name="MeshInstance6" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -0.888381, 0.961174, 2.02342 )
-mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
-
-[node name="MeshInstance4" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 1.83426, -0.797178, 0, 0.797178, 1.83426, 0.0157038, -0.0250206, 1.81463 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 5 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.714286, 0, -6.24448e-08, 0, 0.714286, 0, 6.24448e-08, 0, -0.714286, 0, 3.49907, -0.966795 )
+[connection signal="area_shape_entered" from="MobCollider" to="." method="_on_MobCollider_entered"]
