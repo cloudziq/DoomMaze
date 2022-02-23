@@ -24,15 +24,16 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.44528, 0 )
 shape = SubResource( 1 )
 
-[node name="MobDetector" type="Area" parent="."]
+[node name="Collider" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49965, 0 )
-collision_mask = 2
+collision_mask = 10
 
-[node name="CollisionShape" type="CollisionShape" parent="MobDetector"]
+[node name="CollisionShape" type="CollisionShape" parent="Collider"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 4 )
 
 [node name="Body" type="Spatial" parent="."]
+transform = Transform( 1.6, 0, 0, 0, 1, 0, 0, 0, 1.6, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Body"]
 transform = Transform( 1.19376, 0, 0, 0, -4.37114e-08, -1.2, 0, 1.18347, -6.20774e-08, 0, 0.933824, 0 )
@@ -87,4 +88,8 @@ stream = ExtResource( 2 )
 volume_db = 8.0
 bus = "maze_reverb"
 
-[connection signal="body_entered" from="MobDetector" to="." method="_on_MobDetector_body_entered"]
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.355596, 0.93464, 0, -0.93464, 0.355596, 0.0712302, 12.4705, 0 )
+editor_only = true
+
+[connection signal="body_entered" from="Collider" to="." method="_on_Collider_body_entered"]

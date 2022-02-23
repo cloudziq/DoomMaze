@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/Mob.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/mob/mob_chase.ogg" type="AudioStream" id=2]
@@ -17,8 +17,13 @@ mid_height = 0.001
 radial_segments = 24
 rings = 6
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=12]
 albedo_color = Color( 0.278431, 0.0509804, 0.0509804, 1 )
+emission_enabled = true
+emission = Color( 0.721569, 0, 0, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
 
 [sub_resource type="CapsuleMesh" id=7]
 radius = 0.073
@@ -31,14 +36,22 @@ rings = 6
 [sub_resource type="CubeMesh" id=6]
 size = Vector3( 0.61, 0.2, 0.1 )
 
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.278431, 0.0509804, 0.0509804, 1 )
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
 [sub_resource type="CylinderMesh" id=10]
 top_radius = 0.0
 bottom_radius = 0.121
 height = 0.471
 
-[sub_resource type="BoxShape" id=9]
-margin = 0.6
-extents = Vector3( 2.66751, 2.17001, 2.97375 )
+[sub_resource type="CapsuleShape" id=13]
+radius = 3.6
+height = 0.01
 
 [sub_resource type="CapsuleShape" id=11]
 margin = 0.2
@@ -65,13 +78,13 @@ material/0 = SubResource( 3 )
 transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, -1.02682, 3.31406, 2.47236 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 5 )
+material/0 = SubResource( 12 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="Body"]
 transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 0.945764, 3.31406, 2.47236 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 5 )
+material/0 = SubResource( 12 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="Body"]
 transform = Transform( 2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 1.15935, 3.13574, 2.82696 )
@@ -105,9 +118,10 @@ material/0 = SubResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.744018, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 13 )
 
 [node name="MobCollider" type="Area" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -117,39 +131,44 @@ shape = SubResource( 11 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -0.714286, 0, -6.24448e-08, 0, 0.714286, 0, 6.24448e-08, 0, -0.714286, 0, 3.49907, -0.252509 )
+visible = false
 
 [node name="ray_front" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941531, 0 )
+visible = false
 enabled = true
 cast_to = Vector3( 0, 0, 10 )
 collision_mask = 6
 debug_shape_custom_color = Color( 0, 1, 1, 1 )
-debug_shape_thickness = 5.0
+debug_shape_thickness = 5
 
 [node name="ray_left" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941531, -0.0303755 )
+visible = false
 enabled = true
 cast_to = Vector3( 10, 0, 0 )
 collision_mask = 6
 debug_shape_custom_color = Color( 0, 1, 1, 1 )
-debug_shape_thickness = 5.0
+debug_shape_thickness = 5
 
 [node name="ray_right" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941531, -0.0303755 )
+visible = false
 enabled = true
 cast_to = Vector3( -10, 0, 0 )
 collision_mask = 6
 debug_shape_custom_color = Color( 0, 1, 1, 1 )
-debug_shape_thickness = 5.0
+debug_shape_thickness = 5
 
 [node name="ray_to_player" type="RayCast" parent="."]
 process_priority = -1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941531, 0 )
+visible = false
 enabled = true
-cast_to = Vector3( 0, 0, -100 )
+cast_to = Vector3( 0, 0, -60 )
 collision_mask = 5
 debug_shape_custom_color = Color( 0.32549, 1, 0.368627, 1 )
-debug_shape_thickness = 5.0
+debug_shape_thickness = 5
 
 [node name="chase" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 0.714286, 0, 0, 0, 0.714286, 0, 0, 0, 0.714286, 0, 0, 0 )
@@ -162,5 +181,9 @@ bus = "mob"
 emission_angle_degrees = 90.0
 emission_angle_filter_attenuation_db = -6.0
 attenuation_filter_db = -32.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.714286, 0, 0, 0, 0.691783, 0.177877, 0, -0.177877, 0.691783, 0, 17.8571, 0 )
+editor_only = true
 
 [connection signal="area_shape_entered" from="MobCollider" to="." method="_on_MobCollider_entered"]

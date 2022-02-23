@@ -1,8 +1,8 @@
 extends KinematicBody
 
 
-export var SPEED                      := 18.0
-export var SPEED_CHASE_MULTIPLIER     := 3.0
+export var SPEED                      := 28
+export var SPEED_CHASE_MULTIPLIER     := 2.2
 export var SPEED_POST_KILL_MULTIPLIER := 1.0
 
 

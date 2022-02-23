@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Ambient",
+"language": "GDScript",
+"path": "res://scripts/ambient_sounds.gd"
+}, {
+"base": "Node",
 "class": "DiscordRPC",
 "language": "GDScript",
 "path": "res://addons/godot_editor_discord_presence/Discord RPC/DiscordRPC.gd"
@@ -90,6 +95,7 @@ _global_script_classes=[ {
 "path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/pipe/WindowsPipe.gd"
 } ]
 _global_script_class_icons={
+"Ambient": "",
 "DiscordRPC": "",
 "DiscordRPCEnum": "",
 "IPC": "",
@@ -113,7 +119,10 @@ _global_script_class_icons={
 config/name="DoomMaze"
 config/description="Don't touch the mob"
 run/main_scene="res://scenes/Main.tscn"
-config/icon="res://icon.png"
+boot_splash/image="res://splash.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
+config/windows_native_icon="res://icon.ico"
 
 [debug]
 
@@ -125,13 +134,12 @@ gdscript/warnings/standalone_ternary=false
 window/size/width=1280
 window/size/height=860
 window/size/always_on_top=true
-window/size/test_width=853
-window/size/test_height=573
 window/stretch/mode="2d"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot_editor_discord_presence/plugin.cfg", "res://addons/zylann.editor_light/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot_editor_discord_presence/plugin.cfg" )
 
 [input]
 
@@ -171,12 +179,23 @@ test_camera={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777220,"unicode":0,"echo":false,"script":null)
  ]
 }
+render_scale+={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777235,"unicode":0,"echo":false,"script":null)
+ ]
+}
+render_scale-={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777236,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
 3d_physics/layer_1="player"
 3d_physics/layer_2="enemy"
 3d_physics/layer_3="world"
+3d_physics/layer_4="item"
 
 [physics]
 
@@ -185,4 +204,6 @@ test_camera={
 [rendering]
 
 quality/directional_shadow/size=2048
+quality/shadow_atlas/size=2048
+quality/filters/anisotropic_filter_level=1
 quality/filters/use_fxaa=true

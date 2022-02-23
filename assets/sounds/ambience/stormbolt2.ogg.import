@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/stormbolt2.ogg-53098a4e9d266f3caa4455ba07478b99.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/ambience/stormbolt2.ogg"
+dest_files=[ "res://.import/stormbolt2.ogg-53098a4e9d266f3caa4455ba07478b99.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

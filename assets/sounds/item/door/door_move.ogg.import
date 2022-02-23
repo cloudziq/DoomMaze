@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/door_move.ogg-d6c855121e5c8206b5b18c4263945e41.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/item/door/door_move.ogg"
+dest_files=[ "res://.import/door_move.ogg-d6c855121e5c8206b5b18c4263945e41.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

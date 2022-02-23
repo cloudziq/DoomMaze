@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/mesh.obj-e4102f39b8d97c0f343ed79a62b15edb.mesh"
+
+[deps]
+
+files=[ "res://.import/mesh.obj-e4102f39b8d97c0f343ed79a62b15edb.mesh" ]
+
+source_file="res://assets/models/gib1/mesh.obj"
+dest_files=[ "res://.import/mesh.obj-e4102f39b8d97c0f343ed79a62b15edb.mesh", "res://.import/mesh.obj-e4102f39b8d97c0f343ed79a62b15edb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
